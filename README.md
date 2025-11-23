@@ -1,6 +1,32 @@
-# dotfiles config
+# dotfiles
 
 Personal configuration files for macOS. All configs live in `~/.config/` following XDG conventions.
+
+## Setup (New Machine)
+
+```bash
+# Clone to ~/.config (backup existing if needed)
+git clone https://github.com/olearydj/dotfiles.git ~/.config
+
+# Symlink zsh bootstrap (required for zsh to find config)
+ln -s ~/.config/zsh/.zshenv ~/.zshenv
+
+# Install dependencies via Homebrew
+brew install zsh neovim git delta bat eza fzf zoxide direnv ripgrep btop
+brew install --cask ghostty karabiner-elements
+
+# Install oh-my-posh
+brew install jandedobbeleer/oh-my-posh/oh-my-posh
+
+# Install zinit (zsh plugin manager) - happens automatically on first shell launch
+
+# Restart shell
+exec zsh
+```
+
+### Required Fonts
+
+Install [MonaspiceXe Nerd Font](https://www.nerdfonts.com/font-downloads) for Ghostty and Neovim icons.
 
 ## Shell (zsh)
 
