@@ -7,6 +7,15 @@ return {
       local lint = require 'lint'
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
+        python = { 'ruff' },
+        sh = { 'shellcheck' },
+        bash = { 'shellcheck' },
+      }
+
+      -- Point markdownlint to config in nvim directory
+      lint.linters.markdownlint.args = {
+        '--config', vim.fn.stdpath('config') .. '/.markdownlint.json',
+        '--stdin',
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
