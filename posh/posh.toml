@@ -1,0 +1,108 @@
+# https://ohmyposh.dev/
+
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
+version = 3
+final_space = true
+
+[upgrade]
+  source = 'cdn'
+  interval = '168h'
+  auto = false
+  notice = false
+
+# first block - os / path / git branch on the left
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  # operating system
+  [[blocks.segments]]
+    type = 'os'
+    template = '{{ if .WSL }}WSL at {{ end }}{{.Icon}} '
+    foreground = 'p:black'
+    background = 'p:white'
+    style = 'powerline'
+    powerline_symbol = ""
+    leading_powerline_symbol = "█"
+
+  # file path
+  [[blocks.segments]]
+    type = 'path'
+    template = ' {{ .Path }} '
+    foreground = 'p:white'
+    background = 'p:blue'
+    style = 'powerline'
+    powerline_symbol = ""
+
+    [blocks.segments.properties]
+      style = 'agnoster_short'
+      max_depth = 2
+
+  [[blocks.segments]]
+    type = "git"
+    style = "powerline"
+    powerline_symbol = ""
+    foreground = "p:black"
+    background = "p:yellow"
+    template = " {{ .HEAD }} "
+
+    [blocks.segments.properties]
+      branch_icon = "\uF126 "
+
+# second block - dev environment, user@host, elapsed time on right
+[[blocks]]
+  type = 'prompt'
+  alignment = 'right'
+
+  [[blocks.segments]]
+    template = ' <d>{{ .UserName }}@{{ .HostName }}</d> '
+    foreground = 'p:yellow'
+    type = 'session'
+    style = 'plain'
+
+  [[blocks.segments]]
+    template = '(<b>{{ .FormattedMs }}</b>)'
+    foreground = 'p:red'
+    type = 'executiontime'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
+      threshold = 3000
+      style = 'austin'
+
+# third block - input cursor on second line
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    template = '❯'
+    foreground = 'p:green'
+    type = 'status'
+    style = 'powerline'
+    foreground_templates = ['{{ if gt .Code 0 }}p:red{{ end }}']
+
+    [blocks.segments.properties]
+      always_enabled = true
+
+[secondary_prompt]
+  template = '❯❯ '
+  foreground = 'p:green'
+  background = 'transparent'
+
+[transient_prompt]
+  newline = true
+  template = '❯ '
+  foreground = 'p:green'
+  background = 'transparent'
+  foreground_templates = ['{{ if gt .Code 0 }}p:red{{ end }}']
+
+[palette]
+green = "#39FF14"
+red = "#FF0F0F"
+white = "#FFFFFF"
+black = "#000000"
+blue = "#4DA6FF"
+yellow = "#FFD700"

@@ -1,0 +1,49 @@
+#!/bin/bash
+# Converts md → pdf using pandoc + typst (with GitHub-style alert support)
+
+set -euo pipefail
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+DIM='\033[2m'
+NC='\033[0m' # No Color
+
+if [ -z "${1:-}" ]; then
+    echo -e "${BLUE}md2pdf${NC} - markdown to pdf via pandoc + typst"
+    echo -e "${DIM}Usage:${NC} md2pdf <filename>"
+    echo -e "${DIM}Example:${NC} md2pdf hw3a  ${DIM}or${NC}  md2pdf hw3a.md"
+    exit 1
+fi
+
+# Strip .md extension if provided
+BASE="${1%.md}"
+INPUT="${BASE}.md"
+OUTPUT="${BASE}.pdf"
+
+FILTER="$HOME/.config/scripts/alerts.lua"
+TEMPLATE="$HOME/.config/scripts/md2pdf-template.typ"
+
+# Check input exists
+if [ ! -f "$INPUT" ]; then
+    echo -e "${RED}✗${NC} File not found: ${INPUT}"
+    exit 1
+fi
+
+echo -e "${DIM}Converting${NC} ${INPUT} ${DIM}→${NC} ${OUTPUT}"
+
+if pandoc "$INPUT" -o "$OUTPUT" \
+    --from=gfm \
+    --pdf-engine=typst \
+    --lua-filter="$FILTER" \
+    --template="$TEMPLATE" \
+    -V fontsize=11pt \
+    -V margin-x=1in \
+    -V margin-y=1in 2>&1; then
+    SIZE=$(ls -lh "$OUTPUT" | awk '{print $5}')
+    echo -e "${GREEN}✓${NC} ${OUTPUT} ${DIM}(${SIZE})${NC}"
+else
+    echo -e "${RED}✗${NC} Conversion failed"
+    exit 1
+fi

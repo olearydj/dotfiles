@@ -1,0 +1,54 @@
+# To get the default values:
+# ghostty +show-config --default --docs > ~/.config/ghostty/config-default
+
+# ghostty configurator:
+# https://ghostty.zerebos.com/
+
+theme = Arthur
+# background-opacity = 0.85
+# background-blur-radius = 50
+
+# use www.programmingfonts.org to identify / evaluate best options
+# all fonts installed with brew except Menlo, which was included with VS Code
+# and Serious Shanns, which was dl'ed from gh repo:
+# https://github.com/kaBeech/serious-shanns
+
+# font-family = "Cascadia Code NF"
+# font-family = "FiraCode Nerd Font Mono"
+# font-family = "IBM Plex Mono"
+# font-family = "JetBrainsMono Nerd Font Mono"
+# font-family = "Maple Mono NF"
+# font-family = "MonaspiceAr Nerd Font Mono"  # Monospace Argon, humanist sans
+# font-family = "MonaspiceKr Nerd Font Mono"  # Monospace Krypton, mechanical sans
+# font-family = "MonaspiceNe Nerd Font Mono"  # Monospace Neon, neo-grotesque sans
+# font-family = "MonaspiceRn Nerd Font Mono"  # Monospace Radon, handwriting
+font-family = "MonaspiceXe Nerd Font Mono"    # Monospace slab serif
+# font-family = "Menlo"
+# font-family = "RecMonoCasual Nerd Font Mono"  # Recursive
+# font-family = "RecMonoDuotone Nerd Font Mono"
+# font-family = "RecMonoLinear Nerd Font Mono"
+# font-family = "RecMonoSmCasual Nerd Font Mono"
+# font-family = "RobotoMono Nerd Font"
+# font-family = "SeriousShanns Nerd Font Mono"
+
+font-size = 20
+adjust-cell-width = 1
+adjust-cell-height = 2
+
+font-feature = -liga
+font-feature = -calt
+font-feature = -dlig
+
+cursor-style = block
+mouse-hide-while-typing = true
+
+# macos-titlebar-style = hidden
+
+window-decoration = true
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+
+auto-update = check
+
+keybind = shift+enter=text:\n

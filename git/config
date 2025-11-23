@@ -1,0 +1,66 @@
+[user]
+	name = Dan O'Leary
+	email = oleary.dj@gmail.com
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	frag = magenta bold
+	meta = yellow bold
+	new = green bold
+	old = red bold
+	whitespace = red reverse
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
+[help]
+	autoCorrect = prompt
+
+[pager]
+	status = true
+	ls-files = true
+
+[core]
+	pager = delta
+	excludesFile = /Users/djo/.config/git/ignore
+
+[delta]
+	# https://dandavidson.github.io/delta/configuration.html
+	hyperlinks = true
+	line-numbers = true
+	navigate = true
+	side-by-side = true
+	# for available themes: delta --list-syntax-themes
+	syntax-theme = Monokai Extended
+
+[diff]
+	colorMoved = default
+
+[interactive]
+	diffFilter = delta --color-only
+
+[merge]
+	conflictStyle = zdiff3
+
+[init]
+	defaultBranch = main
+[diff "jupyternotebook"]
+	command = git-nbdiffdriver diff
+	tool = nbdime
+[merge "jupyternotebook"]
+	driver = git-nbmergedriver merge %O %A %B %L %P
+	name = jupyter notebook merge driver
+[difftool "nbdime"]
+	cmd = git-nbdifftool diff \"$LOCAL\" \"$REMOTE\" \"$BASE\"
+[difftool]
+	prompt = false
+[mergetool "nbdime"]
+	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[mergetool]
+	prompt = false

@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+
+# Secrets and auth tokens
+gh/hosts.yml
+cursor/
+
+# Generated / cache files
+zsh/.zcompdump*
+zsh/.zcompcache/
+zsh/.zsh_sessions/
+zsh/.zsh_history
+
+# Large data directories (node installs, etc.)
+nvm/
+
+# App-specific data
+ppt2llm2/
+
+# Raycast (extensions installed by app, config has tokens)
+raycast/
+

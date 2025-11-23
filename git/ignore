@@ -1,0 +1,177 @@
+##### Global gitignore file
+
+# Python
+*.pyc
+.tox
+.venv
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.cover
+.hypothesis/
+*.mo
+*.pot
+instance/
+.webassets-cache
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# Environment files (secrets, API keys)
+.env
+.env.*
+!.env.example
+!.env.template
+
+# R, RStudio
+.Rhistory
+.RData
+.Rproj.user/
+
+### After this line was originally sourced from:
+### https://github.com/github/gitignore/tree/main/Global
+### not included: VirtualEnv, VisualStudioCode, or Xcode
+
+## Mac stuff
+
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+## Microsoft Office stuff
+*.tmp
+
+# Word temporary
+~$*.doc*
+
+# Word Auto Backup File
+Backup of *.doc*
+
+# Excel temporary
+~$*.xls*
+
+# Excel Backup File
+*.xlk
+
+# PowerPoint temporary
+~$*.ppt*
+
+# Visio autosave temporary files
+*.~vsd*
+
+## VIM
+
+# Swap
+[._]*.s[a-v][a-z]
+!*.svg  # comment out if you don't need vector files
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+Sessionx.vim
+
+# Temporary
+.netrwhist
+*~
+
+# Auto-generated tag files
+tags
+
+# Persistent undo
+[._]*.un~
+
+## Node / JavaScript
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.eslintcache
+.node_repl_history
+*.tgz
+.yarn-integrity
+
+## Logs
+*.log
+logs/
+*.log.*
+
+## OS / Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.project
+.settings/
+.classpath
+
+## Backup files
+*.bak
+*.backup
+*.orig
+*.rej
+*~
+
+## Security / Credentials
+*.pem
+*.key
+*.cert
+*.p12
+*.pfx
+id_rsa*
+*.ppk
+credentials
+secrets.yml
+secrets.yaml
+
+**/.claude/settings.local.json
