@@ -1,0 +1,70 @@
+{
+  "permissions": {
+    "allow": [],
+    "ask": [
+      "Bash(git commit *)",
+      "Bash(git push *)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(**/*.key)",
+      "Read(**/*.pem)",
+      "Read(**/*credentials*)",
+      "Read(**/*secret*)",
+      "Bash(sudo *)",
+      "Bash(rm -rf *)",
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git reset --hard *)",
+      "Bash(pip *)"
+    ],
+    "defaultMode": "acceptEdits"
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "excludedCommands": ["docker", "uv"],
+    "allowUnsandboxedCommands": false,
+    "additionalDirectories": [
+      "/Volumes/Casa",
+      "/casa",
+      "/Users/djo/.local/bin",
+      "/Users/djo/.config"
+    ],
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "*.githubusercontent.com",
+        "pypi.org",
+        "*.pythonhosted.org",
+        "*.npmjs.org",
+        "claude.ai",
+        "www.youtube.com"
+      ]
+    }
+  },
+  "hooks": {
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/djo/.claude/hooks/pre-compact-summary.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/djo/.config/claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "context7@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true
+  },
+  "alwaysThinkingEnabled": true
+}
