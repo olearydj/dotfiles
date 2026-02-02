@@ -33,8 +33,8 @@ export UV_CACHE_DIR=/Volumes/Casa/.uv-cache
 **Sandbox conflict:** The uv cache contains `.git` marker files (to prevent git indexing). Claude Code's sandbox blocks `.git` access, causing `uv` commands to fail with "Operation not permitted". This is tracked in [anthropics/claude-code#22620](https://github.com/anthropics/claude-code/issues/22620).
 
 **Workaround:** Claude Code cannot run `uv` commands directly. For the ad-hoc Python environment:
-- User must run `uv add <package> --project /casa/dev/claude-code` manually
-- Claude Code uses the venv python directly: `/casa/dev/claude-code/.venv/bin/python`
+- User must run `uv add <package> --project /casa/dev/default-python` manually
+- Claude Code uses the venv python directly: `/casa/dev/default-python/.venv/bin/python`
 
 ### Sandbox Limitations
 

@@ -42,3 +42,6 @@ claude/statsig/
 claude/tasks/
 claude/telemetry/
 claude/todos/
+
+# User-specific symlinks
+docs/
