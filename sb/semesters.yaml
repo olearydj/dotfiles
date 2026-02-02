@@ -1,0 +1,41 @@
+user:
+  name: Dan O'Leary, Ph.D.
+  email: dan.oleary@auburn.edu
+  title: Lecturer
+  department: ISE
+  office: 3301J Shelby Center
+  zoom: https://auburn.zoom.us/j/8171775960
+  zoom_alias: aub.ie/zoomdan
+current_semester: Spring 2026
+semesters:
+  - term: Spring 2026
+    start: 2026-01-07
+    end: 2026-04-24
+    final_exams:
+      start: 2026-04-27
+      end: 2026-05-01
+    spring_break:
+      start: 2026-03-09
+      end: 2026-03-13
+    holidays:
+      - date: 2026-01-15
+        name: No class (sick)
+      - date: 2026-01-19
+        name: M.L. King, Jr. Day
+      - date: 2026-03-09
+        name: Spring Break
+      - date: 2026-03-10
+        name: Spring Break
+      - date: 2026-03-11
+        name: Spring Break
+      - date: 2026-03-12
+        name: Spring Break
+      - date: 2026-03-13
+        name: Spring Break
+    courses:
+      - number: INSY 3010
+        path: /Volumes/Casa/au/teaching/INSY3010-PySQL
+        role: instructor_of_record
+      - number: INSY 7740
+        path: /Volumes/Casa/au/teaching/INSY7740-PD2
+        role: instructor_of_record

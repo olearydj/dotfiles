@@ -1,0 +1,1 @@
+Laptops are to be used only for notetaking and other class-related activities during lectures. Cell phones and other electronic devices should remain "stowed in the off position" throughout, unless otherwise instructed. Inappropriate use of any such device may impact your attendance grade.

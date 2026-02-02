@@ -1,0 +1,11 @@
+{
+    "anon_id": "65f13f52-779c-4567-8ab9-76b4a28a816a", 
+    "ui": {
+        "scrollbar": "thin", 
+        "throbber": "pulse", 
+        "info-bar": true
+    }, 
+    "sidebar": {
+        "hide": true
+    }
+}

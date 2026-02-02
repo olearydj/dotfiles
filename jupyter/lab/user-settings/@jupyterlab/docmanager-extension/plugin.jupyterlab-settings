@@ -1,0 +1,5 @@
+{
+    // Disable autosave to prevent unintentional jupytext sync
+    // when editing notebooks during presentations or demos
+    "autosave": false
+}

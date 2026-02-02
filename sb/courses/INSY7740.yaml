@@ -1,0 +1,38 @@
+# Shared Course Definition: INSY 7740
+# Referenced via: course_ref: "INSY7740"
+
+number: "INSY 7740"
+title: "Product Launch, Manufacture, and Delivery (PD2)"
+credits: 3
+modality: hybrid
+
+description: |
+  This course teaches students the issues, strategies, and approaches
+  related to launching, manufacturing, and delivering new products or
+  services including customer focus, marketing, manufacturing and launch
+  strategies, delivery and related tools and techniques.
+
+objectives:
+  - "Apply product, project, and portfolio management principles"
+  - "Evaluate prototyping and manufacturing considerations"
+  - "Navigate human and organizational challenges in corporate innovation"
+  - "Integrate finance, law, and marketing perspectives into product development"
+  - "Execute a semester-long product development project"
+
+prerequisites: |
+  Graduate standing. INSY 7730 (PD1) is recommended but not required.
+  Students who have not completed it may benefit from additional
+  collaboration and study time.
+
+materials: |
+  Anderson, A. M., et al. (2020). *Product Development and Management Body
+  of Knowledge* (2nd ed.). PDMA. A 3rd edition may be available.
+
+  The textbook is not required but may be beneficial. It is included with
+  [PDMA membership](https://www.pdma.org/), which also offers product
+  development certifications based on the book.
+
+topics: |
+  Product and portfolio management, product design and development tools,
+  culture and team leadership, go-to-market planning, guest lectures from
+  industry practitioners, and semester project presentations.

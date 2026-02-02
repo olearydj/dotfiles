@@ -1,0 +1,39 @@
+# Shared Course Definition: INSY 7120
+# Referenced via: course_ref: "INSY7120"
+
+number: "INSY 7120"
+title: "Python for Supervised Machine Learning"
+credits: 3
+modality: face-to-face
+
+description: |
+  This course teaches students to apply supervised machine learning methods
+  using Python and scikit-learn. Topics include regression, classification,
+  decision trees, and ensemble methods. Students develop practical skills
+  in the complete ML workflow: data preparation, model fitting, evaluation,
+  and selection.
+
+objectives:
+  - "Apply the scikit-learn workflow to regression and classification problems"
+  - "Interpret model coefficients, metrics, and diagnostics"
+  - "Use cross-validation for model selection and hyperparameter tuning"
+  - "Implement decision trees and ensemble methods (Random Forest, XGBoost)"
+  - "Handle practical challenges: feature engineering, imbalanced data, regularization"
+  - "Learn new ML methods independently from documentation"
+
+prerequisites: |
+  Graduate standing. INSY 7110 (Python for EDA) is recommended but not required.
+  Students without prior Python experience should expect additional study time
+  for the prerequisites backfill material.
+
+materials: |
+  James, G., et al. (2021). *An Introduction to Statistical Learning with
+  Applications in Python* (ISLP). Available free at https://www.statlearning.com/
+
+  Geron, A. (2022). *Hands-On Machine Learning with Scikit-Learn, Keras &
+  TensorFlow* (3rd ed.). O'Reilly. Recommended for additional hands-on examples.
+
+topics: |
+  Simple and multiple linear regression, cross-validation, regularization (Ridge/Lasso),
+  logistic regression, classification metrics (precision/recall/ROC), imbalanced data,
+  decision trees, random forests, gradient boosting, and end-to-end ML projects.

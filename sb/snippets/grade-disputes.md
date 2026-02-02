@@ -1,0 +1,1 @@
+Students that believe an assignment was graded incorrectly are welcome to politely and professionally communicate their specific concern(s) and request(s) via email. Grade changes are made entirely at the instructor's discretion, based solely on the merits of the student's case. Rude, baseless, unprofessional, or purely emotional requests will be ignored.

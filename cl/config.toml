@@ -1,0 +1,5 @@
+canvas_base_url = "https://auburn.instructure.com/"
+db_path = "/Users/djo/.local/share/cl/ledger.db"
+log_level = "warning"
+secret_provider = "1password"
+op_reference = "op://Dev/Canvas/password"

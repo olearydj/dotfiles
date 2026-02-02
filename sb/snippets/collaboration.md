@@ -1,0 +1,1 @@
+Study groups are encouraged but, unless specifically directed otherwise (e.g. team project assignments), all student work submitted for grading must be based on your individual effort. All assignments should be prepared and presented in a professional manner, with clear formatting, proper grammar, and appropriate documentation.

@@ -1,0 +1,35 @@
+# Shared Course Definition: INSY 3010
+# Referenced via: course_ref: "INSY3010"
+
+number: "INSY 3010"
+title: "Programming and Database Applications for ISE"
+credits: 3
+modality: face-to-face
+cross_listed_as:
+  - "INSY 3017"
+
+description: |
+  Programming and database applications for ISE students. Focus is on
+  algorithm development as related to optimization, probability,
+  statistics, and data analysis.
+
+objectives:
+  - "Interpret and break down problems into logical components"
+  - "Devise a sequence of steps to solve programming problems"
+  - "Translate problem-solving steps into proper Python and/or SQL syntax"
+  - "Apply common programming patterns to solve analytical problems"
+  - "Iterate and debug until a correct general solution is produced"
+
+prerequisites: "COMP 12x0, Introduction to Computing for Engineers and Scientists"
+
+materials: |
+  All required instructional material will be provided at no cost. This will consist of slides, PDFs, and Jupyter Notebooks created by the instructor. Optional references will also be suggested, most of which are also freely available.
+
+  All other course materials will be delivered, and all assignments submitted, via Canvas. Students are responsible for keeping up with Canvas updates and announcements and are encouraged to set up mobile notifications. If details here and on Canvas differ, the latter takes precedence.
+
+topics: |
+  The following major topic areas will be covered:
+
+  - General: Problem decomposition, program flow, algorithm development and implementation.
+  - Python: Core syntax and constructs, including data types, branching, and loops. Building solutions with Python, including functions, modules, file/error handling, and tooling.
+  - SQL: Concepts and structure of relational databases. Queries, Joins, and Python integration.

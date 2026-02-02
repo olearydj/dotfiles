@@ -1,0 +1,1 @@
+All portions of the Auburn University student academic honesty code (Title XII) will apply to this class. Alleged violations will be reported and may result in an F overall regardless of final average. Violations include but are not limited to cheating on a quiz or examination, plagiarism, unauthorized collaboration, and the use of unauthorized electronic devices.

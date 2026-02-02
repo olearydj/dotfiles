@@ -1,0 +1,233 @@
+{# sb-template-version: 0.4.2 #}
+# {{ course.title }}
+
+Department of Industrial & Systems Engineering, Auburn University  
+{{ course.number }}, {{ semester.term }}
+
+## Course Description
+
+{{ course.description }}
+
+## Course Objectives
+
+Students that successfully complete this course will be able to:
+
+{% for objective in course.objectives %}
+{{ loop.index | alpha }}. {{ objective }}
+{% endfor %}
+{% if 'success' in policies.include and snippets.success %}
+
+## Success in this Class
+
+{{ snippets.success }}
+{% endif %}
+
+## Teaching Team
+
+### Instructor of Record
+{% for member in teaching_team.members %}
+{% if member.role.value == 'instructor_of_record' %}
+
+- {{ member.name }}{% if member.title %}, {{ member.title }}{% endif %}{{ ', ' + member.department if member.department else '' }}
+  - Office: {{ member.office }}
+  - Email: {{ member.email }}
+{% if member.zoom %}
+  - Zoom: [{{ member.zoom_alias or member.zoom }}]({{ member.zoom }})
+{% endif %}
+  - Office Hours: {{ member.office_hours }}
+{% endif %}
+{% endfor %}
+{% set co_instructors = teaching_team.members | selectattr('role.value', 'equalto', 'co_instructor') | list %}
+{% if co_instructors %}
+
+### Co-Instructors
+{% for member in co_instructors %}
+
+- {{ member.name }}{% if member.title %}, {{ member.title }}{% endif %}{{ ', ' + member.department if member.department else '' }}
+  - Office: {{ member.office }}
+  - Email: {{ member.email }}
+  - Office Hours: {{ member.office_hours }}
+{% endfor %}
+{% endif %}
+{% set tas = teaching_team.members | selectattr('role.value', 'equalto', 'teaching_assistant') | list %}
+{% if tas %}
+
+### Teaching Assistants
+{% for member in tas %}
+
+- {{ member.name }}{% if member.title %}, {{ member.title }}{% endif %}{{ ', ' + member.department if member.department else '' }}
+  - Office: {{ member.office }}
+  - Email: {{ member.email }}
+  - Office Hours: {{ member.office_hours }}
+{% endfor %}
+{% endif %}
+
+## Course Details
+
+- Credits: {{ course.credits }} hours
+{% if course.prerequisites %}
+- Prerequisite: {{ course.prerequisites }}
+{% endif %}
+{% if course.cross_listed_as %}
+- Cross-listed as: {{ course.cross_listed_as | join(", ") }}
+{% endif %}
+- Lectures: {{ schedule.meeting_days | map('weekday') | join(" and ") }} {{ schedule.meeting_time }}, {{ schedule.location }}
+- Instructional Delivery Method: {{ course.modality | title }}
+{% if schedule.recording.recorded %}
+- Recording: Sessions are recorded and available to students
+{% else %}
+- Zoom: No simulcast / recording planned
+{% endif %}
+- Semester: {{ semester.semester_start.strftime('%B %d, %Y') }} - {{ semester.semester_end.strftime('%B %d, %Y') }} (final exams follow)
+{% if 'attendance_pd' in policies.include and snippets.attendance_pd %}
+
+### Attendance Expectations
+
+{{ snippets.attendance_pd }}
+{% endif %}
+{% if 'honors' in policies.include and snippets.honors %}
+
+### Honors Section
+
+{{ snippets.honors }}
+{% endif %}
+
+## Topics and Schedule
+
+### Topics
+
+{{ course.topics }}
+
+### Schedule
+
+The following schedule is tentative and subject to change. A detailed, up-to-date schedule will be maintained on Canvas. Wherever course details differ between this document and Canvas, the latter takes precedence.
+
+| Week | Topics |
+|:----:|--------|
+{% for week in computed_schedule.weeks %}
+| {{ week.number }} | {{ week.topics | join(", ") }} |
+{% endfor %}
+{% if final_exam and final_exam.notes %}
+
+{{ final_exam.notes }}
+{% endif %}
+
+## Materials and Evaluation
+{% if course.materials %}
+
+{{ course.materials }}
+{% endif %}
+{% if 'laptops' in policies.include and snippets.laptops %}
+
+### Laptops
+
+{{ snippets.laptops }}
+{% endif %}
+
+### Requirements and Evaluation
+
+Student performance will be evaluated as summarized below.
+
+| Component | Weight | Description |
+|:---------:|:------:|-------------|
+{% for cat in grading.categories %}
+| {{ cat.name }} | {{ cat.weight }}% | {{ cat.description or '' }} |
+{% endfor %}
+| TOTAL | 100% | |
+
+This course uses the traditional 10-point grading scale (A: 90+, etc.). There will be no unannounced quizzes. Except where specifically directed, all quizzes and tests are closed book, closed notes. Various bonus opportunities may be offered throughout the semester.
+
+Additional details for all assignments can be found on Canvas. The instructor may choose to drop and/or curve grades at their discretion.
+
+### Late and Missed Work
+
+{% if grading.late_policy.type == 'percent_per_day' %}
+Late work receives a penalty of up to {{ grading.late_policy.penalty }}% per day.
+{% elif grading.late_policy.type == 'not_accepted' %}
+Late work is not accepted.
+{% endif %}
+
+The approval to make up missed work, including exams, is *not guaranteed*. Students should contact the instructor promptly about any missed work to discuss possible arrangements. Makeup exam requests must be made within 36 hours of the scheduled exam time.
+{% if 'grade-disputes' in policies.include and snippets.grade_disputes %}
+
+### Grade Disputes
+
+{{ snippets.grade_disputes }}
+{% endif %}
+
+## Getting Help and Communication
+
+We are happy to meet with you during the office hours listed above. Additionally, you are free to email us at any time (details in the following section). Email is often a very effective medium for code-related questions as it allows the teaching team time to carefully review your question and code before responding clearly and concisely, in a format that you can refer back to as required. The exchange is also documented so we all better understand the steps taken.
+{% if 'communication' in policies.include and snippets.communication %}
+
+### Communication
+
+{{ snippets.communication }}
+{% endif %}
+{% if 'getting-help' in policies.include and snippets.getting_help %}
+
+### Getting Help Effectively
+
+{{ snippets.getting_help }}
+{% endif %}
+
+## Course Policies
+
+Unless otherwise specified below, this course adheres to all Auburn University policies as outlined in the [Student Policy eHandbook (Tiger Cub)](http://www.auburn.edu/student_info/student_policies/).
+{% if 'collaboration' in policies.include and snippets.collaboration %}
+
+### Collaboration and Individual Work
+
+{{ snippets.collaboration }}
+{% endif %}
+
+### Academic Integrity
+
+Academic misconduct can result in an F for the course regardless of final average. Falsifying attendance or participation is a serious matter that will result in deductions and may be reported as Academic Dishonesty.
+{% if 'code-integrity' in policies.include and snippets.code_integrity %}
+
+### Code and Assignment Integrity
+
+{{ snippets.code_integrity }}
+{% endif %}
+{% if 'academic-honesty' in policies.include and snippets.academic_honesty %}
+
+### University Academic Honesty Policy
+
+{{ snippets.academic_honesty }}
+{% endif %}
+{% if 'student-privacy' in policies.include and snippets.student_privacy %}
+
+### Student Interaction and Privacy
+
+{{ snippets.student_privacy }}
+{% endif %}
+{% if 'electronic-devices' in policies.include and snippets.electronic_devices %}
+
+### Electronic Devices
+
+{{ snippets.electronic_devices }}
+{% endif %}
+{% if 'absences_grad' in policies.include and snippets.absences_grad %}
+
+### Absences
+
+{{ snippets.absences_grad }}
+{% elif 'absences' in policies.include and snippets.absences %}
+
+### Absences
+
+{{ snippets.absences }}
+{% endif %}
+{% if 'disability' in policies.include and snippets.disability %}
+
+### Accommodations
+
+{{ snippets.disability }}
+{% endif %}
+{% if 'contingencies' in policies.include and snippets.contingencies %}
+
+## Contingency Plan
+
+{{ snippets.contingencies }}
+{% endif %}
