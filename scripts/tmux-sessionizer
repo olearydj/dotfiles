@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# tmux-sessionizer - ThePrimeagen style project switching
+# Fuzzy-find a project directory and create/attach to a named tmux session
+
+# Directories to search for projects (edit to match your setup)
+SEARCH_DIRS=(
+    /casa/dev
+)
+
+# Build find command for existing directories
+find_args=()
+for dir in "${SEARCH_DIRS[@]}"; do
+    [[ -d "$dir" ]] && find_args+=("$dir")
+done
+
+if [[ ${#find_args[@]} -eq 0 ]]; then
+    echo "No search directories found"
+    exit 1
+fi
+
+# If argument provided, use it; otherwise fuzzy-find
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(find "${find_args[@]}" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | fzf)
+fi
+
+[[ -z "$selected" ]] && exit 0
+
+# Create session name from directory (replace dots with underscores)
+selected_name=$(basename "$selected" | tr . _)
+
+# Check if tmux is running
+tmux_running=$(pgrep tmux)
+
+# If not in tmux and tmux isn't running, start new session
+if [[ -z "$TMUX" ]] && [[ -z "$tmux_running" ]]; then
+    tmux new-session -s "$selected_name" -c "$selected"
+    exit 0
+fi
+
+# Create session if it doesn't exist
+if ! tmux has-session -t="$selected_name" 2>/dev/null; then
+    tmux new-session -ds "$selected_name" -c "$selected"
+fi
+
+# Switch to session
+tmux switch-client -t "$selected_name"
