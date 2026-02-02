@@ -21,4 +21,24 @@ ppt2llm2/
 raycast/
 
 tmux/plugins/
+
+# Claude Code state (managed by app, not config)
 claude/plugins/
+claude/.claude.json*
+claude/agents/
+claude/cache/
+claude/commands/
+claude/debug/
+claude/downloads/
+claude/file-history/
+claude/history.jsonl
+claude/paste-cache/
+claude/plans/
+claude/projects/
+claude/session-env/
+claude/shell-snapshots/
+claude/stats-cache.json
+claude/statsig/
+claude/tasks/
+claude/telemetry/
+claude/todos/
