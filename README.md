@@ -89,7 +89,37 @@ Transient prompt enabled with blank line before old prompts.
 
 **Location:** `~/.config/nvim/`
 
-Based on kickstart.nvim. Nerd Font icons enabled.
+Based on kickstart.nvim with custom plugins in `lua/custom/`.
+
+**Features:**
+- Hybrid relative line numbers (current line shows absolute)
+- Sticky scroll context (treesitter-context) - parent headers/functions pinned at top
+- Outline sidebar (aerial.nvim) with Telescope integration
+- Diagnostics: icons in margin only, `<leader>e` to inspect full message
+
+**Custom Plugins:**
+- `nvim-treesitter-context` - VS Code-style sticky scroll
+- `aerial.nvim` - Symbol outline sidebar
+- `markdown-preview.nvim` - Live preview in browser
+
+**Markdown:**
+- Soft wrap with `j`/`k` navigating display lines
+- Linting disabled by default (manual with `<leader>ml`)
+- Auto-fix with `<leader>mf`
+- Format-on-save disabled (use `<leader>f` to format manually, or `:noa w` to save without any autocmds)
+- Config: `.markdownlint.json` (dash-style lists, no line length limit)
+
+**Key Bindings (custom):**
+
+| Binding | Action |
+|---------|--------|
+| `<leader>e` | Show diagnostic in float |
+| `<leader>o` | Toggle outline sidebar |
+| `<leader>so` | Search outline symbols (Telescope) |
+| `[c` | Jump to sticky context |
+| `<leader>mp` | Markdown preview toggle |
+| `<leader>ml` | Markdown lint (manual) |
+| `<leader>mf` | Markdown auto-fix |
 
 ## Git
 
