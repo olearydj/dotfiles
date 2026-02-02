@@ -175,3 +175,4 @@ secrets.yml
 secrets.yaml
 
 **/.claude/settings.local.json
+docs/sessions  # don't sync symlinks to cc session files
