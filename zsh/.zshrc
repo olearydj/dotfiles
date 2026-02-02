@@ -28,9 +28,6 @@ HISTSIZE=5000
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
 
-# --- uv settings ---
-export UV_CACHE_DIR=/Volumes/Casa/.uv-cache
-
 # --- shell integrations ---
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(direnv hook zsh)"
@@ -39,6 +36,9 @@ eval "$(direnv hook zsh)"
 export BAT_THEME="Monokai Extended Bright"
 export LESS="--chop-long-lines --HILITE-UNREAD --ignore-case --incsearch --jump-target=4 --LONG-PROMPT --no-init --quit-if-one-screen --RAW-CONTROL-CHARS --use-color --window=-4"
 export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgreprc"
+export QUARTO_PYTHON=~/.local/share/uv/tools/jupyterlab/bin/python
+export CLAUDE_CONFIG_DIR="$HOME/.config/claude"
+export JUPYTER_CONFIG_DIR="$HOME/.config/jupyter"
 
 # --- nvm settings ---
 export NVM_DIR="$HOME/.config/nvm"
@@ -63,11 +63,11 @@ source "${ZDOTDIR}/fzf.zsh"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # completion styling
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'         # case insensitive
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}          # colorize completions
-zstyle ':completion:*' group-name ''                           # group matches by type
-zstyle ':completion:*:*:*:*:directories' list-dirs-first true  # dirs before files
-zstyle ':fzf-tab:*' fzf-command fzf                            # use fzf for tab completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:*:*:*:directories' list-dirs-first true
+zstyle ':fzf-tab:*' fzf-command fzf
 
 # --- Oh-My-Posh Prompt Setup ---
 # original themes installed to ${brew --prefix oh-my-posh}/themes/

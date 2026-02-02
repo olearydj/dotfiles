@@ -31,3 +31,4 @@ export ZSHDDIR="${XDG_STATE_HOME}/zsh/sessions"
 
 # uv tools
 export PATH="${HOME}/.local/bin:$PATH"
+export UV_CACHE_DIR=/Volumes/Casa/.uv-cache
