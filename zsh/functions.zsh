@@ -19,3 +19,6 @@ function cdf() {
   cd "$(pfd)"
 }
 
+# create a backup copy of a file
+function bak() { cp "$1" "$1.bak"; }
+
