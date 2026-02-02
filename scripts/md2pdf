@@ -10,40 +10,93 @@ BLUE='\033[0;34m'
 DIM='\033[2m'
 NC='\033[0m' # No Color
 
-if [ -z "${1:-}" ]; then
-    echo -e "${BLUE}md2pdf${NC} - markdown to pdf via pandoc + typst"
-    echo -e "${DIM}Usage:${NC} md2pdf <filename>"
-    echo -e "${DIM}Example:${NC} md2pdf hw3a  ${DIM}or${NC}  md2pdf hw3a.md"
-    exit 1
-fi
+# Parse options
+NUMBERED=false
+while getopts "n" opt; do
+	case $opt in
+		n) NUMBERED=true ;;
+		*) ;;
+	esac
+done
+shift $((OPTIND - 1))
 
-# Strip .md extension if provided
-BASE="${1%.md}"
-INPUT="${BASE}.md"
-OUTPUT="${BASE}.pdf"
+if [ -z "${1:-}" ]; then
+	echo -e "${BLUE}md2pdf${NC} - markdown to pdf via pandoc + typst"
+	echo -e "${DIM}Usage:${NC} md2pdf [-n] <filename|directory>"
+	echo -e "${DIM}Options:${NC}"
+	echo -e "  -n          Number section headers"
+	echo -e "${DIM}Example:${NC} md2pdf hw3a  ${DIM}or${NC}  md2pdf -n hw3a.md  ${DIM}or${NC}  md2pdf ./output"
+	exit 1
+fi
 
 FILTER="$HOME/.config/scripts/alerts.lua"
-TEMPLATE="$HOME/.config/scripts/md2pdf-template.typ"
 
-# Check input exists
-if [ ! -f "$INPUT" ]; then
-    echo -e "${RED}✗${NC} File not found: ${INPUT}"
-    exit 1
+# Build pandoc options (shared for all conversions)
+PANDOC_OPTS=(
+	--from=gfm
+	--pdf-engine=typst
+	--lua-filter="$FILTER"
+	-V mainfont="Georgia"
+	-V fontsize=11pt
+	-V margin-x=1in
+	-V margin-y=1in
+)
+
+if [ "$NUMBERED" = true ]; then
+	PANDOC_OPTS+=(--number-sections)
 fi
 
-echo -e "${DIM}Converting${NC} ${INPUT} ${DIM}→${NC} ${OUTPUT}"
+# Function to convert a single file
+convert_file() {
+	local INPUT="$1"
+	local OUTPUT="${INPUT%.md}.pdf"
 
-if pandoc "$INPUT" -o "$OUTPUT" \
-    --from=gfm \
-    --pdf-engine=typst \
-    --lua-filter="$FILTER" \
-    --template="$TEMPLATE" \
-    -V fontsize=11pt \
-    -V margin-x=1in \
-    -V margin-y=1in 2>&1; then
-    SIZE=$(ls -lh "$OUTPUT" | awk '{print $5}')
-    echo -e "${GREEN}✓${NC} ${OUTPUT} ${DIM}(${SIZE})${NC}"
+	if pandoc "$INPUT" -o "$OUTPUT" "${PANDOC_OPTS[@]}" \
+		--include-in-header=<(echo '#import "@preview/gentle-clues:1.2.0": *') 2>&1; then
+		SIZE=$(ls -lh "$OUTPUT" | awk '{print $5}')
+		echo -e "${GREEN}✓${NC} ${OUTPUT} ${DIM}(${SIZE})${NC}"
+		return 0
+	else
+		echo -e "${RED}✗${NC} Failed: ${INPUT}"
+		return 1
+	fi
+}
+
+# Check if input is a directory
+if [ -d "$1" ]; then
+	DIR="$1"
+	FILES=("$DIR"/*.md)
+
+	if [ ! -e "${FILES[0]}" ]; then
+		echo -e "${RED}✗${NC} No .md files found in ${DIR}"
+		exit 1
+	fi
+
+	COUNT=${#FILES[@]}
+	echo -e "${DIM}Converting${NC} ${COUNT} ${DIM}files in${NC} ${DIR}"
+
+	SUCCESS=0
+	FAILED=0
+	for FILE in "${FILES[@]}"; do
+		if convert_file "$FILE"; then
+			((SUCCESS++))
+		else
+			((FAILED++))
+		fi
+	done
+
+	echo -e "${DIM}Done:${NC} ${GREEN}${SUCCESS} converted${NC}"
+	[ "$FAILED" -gt 0 ] && echo -e "${RED}${FAILED} failed${NC}"
 else
-    echo -e "${RED}✗${NC} Conversion failed"
-    exit 1
+	# Single file mode
+	BASE="${1%.md}"
+	INPUT="${BASE}.md"
+
+	if [ ! -f "$INPUT" ]; then
+		echo -e "${RED}✗${NC} File not found: ${INPUT}"
+		exit 1
+	fi
+
+	echo -e "${DIM}Converting${NC} ${INPUT}"
+	convert_file "$INPUT"
 fi
