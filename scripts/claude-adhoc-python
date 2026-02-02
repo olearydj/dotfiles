@@ -1,0 +1,5 @@
+#!/bin/zsh
+echo "⚠️  This Python instance is for ad-hoc usage only."
+echo "   If working in a project with its own venv, use that instead."
+echo ""
+exec uv run --project /casa/dev/claude-code python "$@"

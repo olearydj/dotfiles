@@ -1,0 +1,91 @@
+#!/bin/bash
+# Converts quiz markdown files to QTI zip for Canvas import via text2qti
+
+set -euo pipefail
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+DIM='\033[2m'
+NC='\033[0m' # No Color
+
+# Usage
+if [ -z "${1:-}" ]; then
+	echo -e "${BLUE}make-qti${NC} - quiz markdown to Canvas QTI via text2qti"
+	echo -e "${DIM}Usage:${NC} make-qti <quiz-file|directory>"
+	echo -e "${DIM}Example:${NC} make-qti quiz1  ${DIM}or${NC}  make-qti quiz1.md  ${DIM}or${NC}  make-qti ./quizzes"
+	echo -e "${DIM}Output:${NC} ~/Downloads/<quiz-name>.zip"
+	exit 1
+fi
+
+# Function to convert a single file
+convert_file() {
+	local INPUT="$1"
+	local BASENAME=$(basename "$INPUT" .md)
+	local TEMP_FILE="${BASENAME}_temp.md"
+	local TEMP_ZIP="${BASENAME}_temp.zip"
+	local FINAL_ZIP="$HOME/Downloads/${BASENAME}.zip"
+
+	# Convert markdown headers to comments for text2qti
+	sed 's/^#/%#/g' "$INPUT" > "$TEMP_FILE"
+
+	# Run text2qti
+	if uvx text2qti "$TEMP_FILE" 2>&1; then
+		# Check if zip was created
+		if [ -f "$TEMP_ZIP" ]; then
+			mv "$TEMP_ZIP" "$FINAL_ZIP"
+			rm -f "$TEMP_FILE"
+			SIZE=$(ls -lh "$FINAL_ZIP" | awk '{print $5}')
+			echo -e "${GREEN}✓${NC} ${FINAL_ZIP} ${DIM}(${SIZE})${NC}"
+			return 0
+		else
+			echo -e "${RED}✗${NC} text2qti did not produce output for: ${INPUT}"
+			rm -f "$TEMP_FILE"
+			return 1
+		fi
+	else
+		echo -e "${RED}✗${NC} Failed: ${INPUT}"
+		rm -f "$TEMP_FILE" "$TEMP_ZIP"
+		return 1
+	fi
+}
+
+# Check if input is a directory
+if [ -d "$1" ]; then
+	DIR="$1"
+	FILES=("$DIR"/*.md)
+
+	if [ ! -e "${FILES[0]}" ]; then
+		echo -e "${RED}✗${NC} No .md files found in ${DIR}"
+		exit 1
+	fi
+
+	COUNT=${#FILES[@]}
+	echo -e "${DIM}Converting${NC} ${COUNT} ${DIM}files in${NC} ${DIR}"
+
+	SUCCESS=0
+	FAILED=0
+	for FILE in "${FILES[@]}"; do
+		if convert_file "$FILE"; then
+			((SUCCESS++))
+		else
+			((FAILED++))
+		fi
+	done
+
+	echo -e "${DIM}Done:${NC} ${GREEN}${SUCCESS} converted${NC}"
+	[ "$FAILED" -gt 0 ] && echo -e "${RED}${FAILED} failed${NC}"
+else
+	# Single file mode
+	BASE="${1%.md}"
+	INPUT="${BASE}.md"
+
+	if [ ! -f "$INPUT" ]; then
+		echo -e "${RED}✗${NC} File not found: ${INPUT}"
+		exit 1
+	fi
+
+	echo -e "${DIM}Converting${NC} ${INPUT}"
+	convert_file "$INPUT"
+fi
