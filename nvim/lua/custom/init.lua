@@ -5,6 +5,10 @@
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'markdown', 'quarto' },
   callback = function()
+    -- Use treesitter markdown parser for quarto files (disables vim regex syntax automatically)
+    if vim.bo.filetype == 'quarto' then
+      vim.treesitter.start(0, 'markdown')
+    end
     vim.opt_local.wrap = true -- Enable line wrapping
     vim.opt_local.linebreak = true -- Wrap at word boundaries
     vim.opt_local.breakindent = true -- Maintain indentation on wrapped lines
@@ -29,7 +33,16 @@ vim.api.nvim_create_autocmd('FileType', {
     end, { buffer = true, desc = '[M]arkdown [F]ix' })
 
     -- Activate otter.nvim for LSP features in code blocks
-    require('otter').activate()
+    vim.schedule(function()
+      local notify = vim.notify
+      vim.notify = function(msg, ...)
+        if type(msg) ~= 'string' or not msg:match('^%[otter%]') then
+          notify(msg, ...)
+        end
+      end
+      require('otter').activate()
+      vim.notify = notify
+    end)
   end,
   group = vim.api.nvim_create_augroup('markdown-quarto', { clear = true }),
 })
