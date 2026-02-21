@@ -2,9 +2,14 @@
 # tmux-sessionizer - ThePrimeagen style project switching
 # Fuzzy-find a project directory and create/attach to a named tmux session
 
-# Directories to search for projects (edit to match your setup)
+# Directories to search for projects (each searched at depth 1)
 SEARCH_DIRS=(
     /casa/dev
+    /casa/au/teaching
+    /casa/pub
+    /casa/obsidian/vault/courses
+    /casa/obsidian/vault/projects
+    /casa/obsidian/vault/dojo
 )
 
 # Build find command for existing directories
@@ -22,7 +27,7 @@ fi
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find "${find_args[@]}" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | fzf)
+    selected=$(fd . "${find_args[@]}" --type d --min-depth 1 --max-depth 1 2>/dev/null | fzf)
 fi
 
 [[ -z "$selected" ]] && exit 0
