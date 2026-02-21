@@ -32,9 +32,17 @@ HISTDUP=erase
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(direnv hook zsh)"
 
+# --- tmux pane title (auto-updates to show current directory) ---
+if [[ -n "$TMUX" ]]; then
+  # Set pane title to current directory before prompt
+  precmd() { printf '\033]2;%s\033\\' "${PWD##*/}" }
+  # Set pane title to running command
+  preexec() { printf '\033]2;%s\033\\' "$1" }
+fi
+
 # --- app settings ---
 export BAT_THEME="Monokai Extended Bright"
-export LESS="--chop-long-lines --HILITE-UNREAD --ignore-case --incsearch --jump-target=4 --LONG-PROMPT --no-init --quit-if-one-screen --RAW-CONTROL-CHARS --use-color --window=-4"
+export LESS="--chop-long-lines --HILITE-UNREAD --ignore-case --incsearch --jump-target=4 --LONG-PROMPT --no-init --quit-if-one-screen --RAW-CONTROL-CHARS --use-color"
 export RIPGREP_CONFIG_PATH="${HOME}/.config/ripgreprc"
 export QUARTO_PYTHON=~/.local/share/uv/tools/jupyterlab/bin/python
 export CLAUDE_CONFIG_DIR="$HOME/.config/claude"
