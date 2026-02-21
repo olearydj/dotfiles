@@ -35,7 +35,7 @@ final_space = true
     style = 'powerline'
     powerline_symbol = ""
 
-    [blocks.segments.properties]
+    [blocks.segments.options]
       style = 'agnoster_short'
       max_depth = 2
 
@@ -47,7 +47,7 @@ final_space = true
     background = "p:yellow"
     template = " {{ .HEAD }} "
 
-    [blocks.segments.properties]
+    [blocks.segments.options]
       branch_icon = "\uF126 "
 
 # second block - dev environment, user@host, elapsed time on right
@@ -66,7 +66,7 @@ final_space = true
     foreground = 'p:red'
     type = 'executiontime'
 
-    [blocks.segments.properties]
+    [blocks.segments.options]
       cache_duration = 'none'
       threshold = 3000
       style = 'austin'
@@ -84,7 +84,7 @@ final_space = true
     style = 'powerline'
     foreground_templates = ['{{ if gt .Code 0 }}p:red{{ end }}']
 
-    [blocks.segments.properties]
+    [blocks.segments.options]
       always_enabled = true
 
 [secondary_prompt]
