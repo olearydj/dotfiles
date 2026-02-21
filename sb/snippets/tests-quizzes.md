@@ -1,1 +1,0 @@
-There will be no unannounced quizzes. Except where specifically directed, all quizzes and tests are closed book, closed notes. The final exam will be given at the date and time [scheduled by the registrar](http://www.auburn.edu/administration/registrar/calendars.html).

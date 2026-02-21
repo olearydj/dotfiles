@@ -1,0 +1,1 @@
+This course uses the traditional 10-point grading scale (A: 90+, etc.). There will be no unannounced quizzes. Except where specifically directed, all quizzes and tests are closed book, closed notes. Various bonus opportunities may be offered throughout the semester.

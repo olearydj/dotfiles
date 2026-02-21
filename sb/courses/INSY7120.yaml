@@ -2,11 +2,13 @@
 # Referenced via: course_ref: "INSY7120"
 
 number: "INSY 7120"
-title: "Python for Supervised Machine Learning"
+title: "Intro to Supervised Machine Learning"
 credits: 3
 modality: face-to-face
 
 description: |
+  Official title: Data Analytics for Operations
+
   This course teaches students to apply supervised machine learning methods
   using Python and scikit-learn. Topics include regression, classification,
   decision trees, and ensemble methods. Students develop practical skills
@@ -22,7 +24,7 @@ objectives:
   - "Learn new ML methods independently from documentation"
 
 prerequisites: |
-  Graduate standing. INSY 7110 (Python for EDA) is recommended but not required.
+  Graduate standing. INSY 5/6500 (Python for EDA) is recommended but not required.
   Students without prior Python experience should expect additional study time
   for the prerequisites backfill material.
 
