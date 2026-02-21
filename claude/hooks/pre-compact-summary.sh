@@ -2,7 +2,7 @@
 # Pre-compact hook: Centralized session notes in Obsidian vault
 #
 # Structure:
-#   /Volumes/Casa/obsidian/new_vault/agent-sessions/
+#   /Volumes/Casa/obsidian/vault/agent-sessions/
 #     {project-name}/
 #       {session-date}-{short-id}/
 #         transcript.jsonl -> ~/.config/claude/.../full-id.jsonl
@@ -17,7 +17,7 @@
 
 set -euo pipefail
 
-CENTRAL_SESSIONS="/Volumes/Casa/obsidian/new_vault/agent-sessions"
+CENTRAL_SESSIONS="/Volumes/Casa/obsidian/vault/agent-sessions"
 
 input=$(cat)
 cwd=$(echo "$input" | jq -r '.cwd // empty')

@@ -1,9 +1,8 @@
 {
   "permissions": {
-    "allow": [],
-    "ask": [
-      "Bash(git commit *)",
-      "Bash(git push *)"
+    "allow": [
+      "Read(//Volumes/Casa/.uv-cache/**)",
+      "Edit(//Volumes/Casa/.uv-cache/**)"
     ],
     "deny": [
       "Read(./.env)",
@@ -19,30 +18,11 @@
       "Bash(git reset --hard *)",
       "Bash(pip *)"
     ],
-    "defaultMode": "acceptEdits"
-  },
-  "sandbox": {
-    "enabled": true,
-    "autoAllowBashIfSandboxed": true,
-    "excludedCommands": ["docker", "uv"],
-    "allowUnsandboxedCommands": false,
-    "additionalDirectories": [
-      "/Volumes/Casa",
-      "/casa",
-      "/Users/djo/.local/bin",
-      "/Users/djo/.config"
+    "ask": [
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ],
-    "network": {
-      "allowedDomains": [
-        "github.com",
-        "*.githubusercontent.com",
-        "pypi.org",
-        "*.pythonhosted.org",
-        "*.npmjs.org",
-        "claude.ai",
-        "www.youtube.com"
-      ]
-    }
+    "defaultMode": "acceptEdits"
   },
   "hooks": {
     "PreCompact": [
@@ -64,7 +44,37 @@
     "context7@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true
+    "code-review@claude-plugins-official": true,
+    "image-generator@dair-academy-plugins": true,
+    "obsidian@obsidian-skills": true
   },
-  "alwaysThinkingEnabled": true
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "allowUnsandboxedCommands": false,
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "api.github.com",
+        "*.githubusercontent.com",
+        "pypi.org",
+        "*.pythonhosted.org",
+        "*.npmjs.org",
+        "claude.ai",
+        "www.youtube.com"
+      ]
+    },
+    "excludedCommands": [
+      "docker",
+      "obsidian"
+    ],
+    "additionalDirectories": [
+      "/Volumes/Casa",
+      "/casa",
+      "/Users/djo/.local/bin",
+      "/Users/djo/.config"
+    ]
+  },
+  "alwaysThinkingEnabled": true,
+  "skipDangerousModePermissionPrompt": true
 }

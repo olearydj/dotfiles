@@ -41,6 +41,7 @@ export UV_CACHE_DIR=/Volumes/Casa/.uv-cache
 The sandbox blocks more than expected:
 
 - **`.git` access** - blocked everywhere, breaks `git clone`, `uv`, and similar tools
+- **Write outside CWD** - `additionalDirectories` only grants read access; `Edit()` permissions don't help bash commands. Use Edit/Write tools instead of bash, or ask user to run the command. ([#10377](https://github.com/anthropics/claude-code/issues/10377))
 - **Symlinks outside CWD** - user must create manually
 - **Heredocs** - write to file first, then execute
 - **`additionalDirectories`** - requires full paths, no tilde expansion
