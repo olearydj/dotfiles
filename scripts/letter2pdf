@@ -1,0 +1,44 @@
+#!/bin/bash
+# Converts letter markdown → pdf using pandoc + typst
+# Frontmatter metadata drives the template (recipient, closing, date)
+# Body text is the only content in the markdown
+
+set -euo pipefail
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+DIM='\033[2m'
+NC='\033[0m'
+
+if [ -z "${1:-}" ]; then
+	echo -e "${BLUE}letter2pdf${NC} - letter markdown to pdf via pandoc + typst"
+	echo -e "${DIM}Usage:${NC} letter2pdf <filename>"
+	echo -e "${DIM}Example:${NC} letter2pdf barber-james  ${DIM}or${NC}  letter2pdf barber-james.md"
+	exit 1
+fi
+
+BASE="${1%.md}"
+INPUT="${BASE}.md"
+
+if [ ! -f "$INPUT" ]; then
+	echo -e "${RED}✗${NC} File not found: ${INPUT}"
+	exit 1
+fi
+
+OUTPUT="${INPUT%.md}.pdf"
+
+SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+TEMPLATE="$SCRIPT_DIR/letter-template.typ"
+
+echo -e "${DIM}Converting${NC} ${INPUT}"
+
+if pandoc "$INPUT" --from=markdown --pdf-engine=typst --template="$TEMPLATE" \
+	-o "$OUTPUT" 2>&1; then
+	SIZE=$(ls -lh "$OUTPUT" | awk '{print $5}')
+	echo -e "${GREEN}✓${NC} ${OUTPUT} ${DIM}(${SIZE})${NC}"
+else
+	echo -e "${RED}✗${NC} Failed: ${INPUT}"
+	exit 1
+fi
