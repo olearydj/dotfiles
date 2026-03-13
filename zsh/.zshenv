@@ -32,3 +32,7 @@ export ZSHDDIR="${XDG_STATE_HOME}/zsh/sessions"
 # uv tools
 export PATH="${HOME}/.local/bin:$PATH"
 export UV_CACHE_DIR=/Volumes/Casa/.uv-cache
+
+# 1password auth
+export CANVAS_API_KEY_OP_REFERENCE="op://Dev/Canvas/credential"
+
