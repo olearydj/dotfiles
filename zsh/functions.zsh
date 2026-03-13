@@ -22,3 +22,30 @@ function cdf() {
 # create a backup copy of a file
 function bak() { cp "$1" "$1.bak"; }
 
+# yank path to clipboard (uses zoxide to resolve)
+function yp() {
+  local dir
+  if [ $# -eq 0 ]; then
+    dir=$(pwd)
+  else
+    dir=$(zoxide query "$@") || return 1
+  fi
+  printf '%s' "$dir" | pbcopy
+  echo "Copied: $dir"
+}
+
+# yank file path to clipboard (zoxide + fzf file picker)
+function ypf() {
+  local dir
+  if [ $# -eq 0 ]; then
+    dir=$(pwd)
+  else
+    dir=$(zoxide query "$@") || return 1
+  fi
+  local file=$(command ls "$dir" | fzf --height=~40% --prompt="file: ")
+  [ -n "$file" ] || return 1
+  local full="$dir/$file"
+  printf '%s' "$full" | pbcopy
+  echo "Copied: $full"
+}
+

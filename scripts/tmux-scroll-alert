@@ -1,0 +1,26 @@
+#!/bin/bash
+# Polls history_size while a pane is in copy mode.
+# Tints the pane background if new lines are added (ignores spinner noise).
+# Usage: tmux-scroll-alert <pane_id>
+
+PANE="$1"
+
+# Only run for copy-mode, not tree-mode, command-mode, etc.
+MODE=$(tmux display-message -p -t "$PANE" '#{pane_mode}')
+[ "$MODE" = "copy-mode" ] || exit 0
+
+INITIAL=$(tmux display-message -p -t "$PANE" '#{history_size}')
+
+while true; do
+    # Exit if pane left copy mode or pane is gone
+    IN_MODE=$(tmux display-message -p -t "$PANE" '#{pane_in_mode}' 2>/dev/null) || break
+    [ "$IN_MODE" = "0" ] && break
+
+    CURRENT=$(tmux display-message -p -t "$PANE" '#{history_size}')
+    if [ "$((CURRENT - INITIAL))" -ge 5 ]; then
+        tmux select-pane -t "$PANE" -P bg=#330000
+        break
+    fi
+
+    sleep 1
+done
