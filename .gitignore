@@ -46,6 +46,10 @@ claude/stats-cache.json
 claude/statsig/
 claude/tasks/
 claude/telemetry/
+claude/backups/
+claude/image-cache/
+claude/mcp-needs-auth-cache.json
+claude/sessions/
 claude/todos/
 
 # User-specific symlinks
