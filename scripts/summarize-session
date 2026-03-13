@@ -3,6 +3,7 @@
 # requires-python = ">=3.11"
 # dependencies = [
 #   "litellm>=1.50",
+#   "tenacity>=8.0",
 # ]
 # ///
 """Summarize Claude Code session transcripts with rich metadata extraction.
@@ -46,6 +47,8 @@ from datetime import datetime
 from pathlib import Path
 
 import litellm
+
+litellm.suppress_debug_info = True
 
 MAX_USER_CHARS = 1000  # Truncate long user messages
 
@@ -759,14 +762,20 @@ def generate_llm_summary(data: SegmentData) -> str:
         files_modified=files_list,
     )
 
-    response = litellm.completion(
-        model="claude-haiku-4-5",
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": prompt},
-        ],
-        max_tokens=4096,
-    )
+    try:
+        response = litellm.completion(
+            model="claude-haiku-4-5",
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": prompt},
+            ],
+            max_tokens=4096,
+            num_retries=3,
+        )
+    except Exception as e:
+        # Extract the useful part of the error, not litellm's full traceback
+        err_msg = str(e).split("\n")[0] if str(e) else type(e).__name__
+        raise RuntimeError(f"LLM call failed: {err_msg}") from None
 
     return response.choices[0].message.content
 
